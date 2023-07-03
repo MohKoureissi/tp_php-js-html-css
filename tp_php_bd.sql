@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 26 juin 2023 à 19:17
+-- Généré le :  lun. 03 juil. 2023 à 17:12
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.11
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `tpbd`
+-- Base de données :  `tp_php_bd`
 --
 
 -- --------------------------------------------------------
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `apprenant` (
+  `idA` int(11) NOT NULL,
   `matricule` varchar(6) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
@@ -37,19 +38,18 @@ CREATE TABLE `apprenant` (
   `email` varchar(20) NOT NULL,
   `telephone` int(20) NOT NULL,
   `photo` varchar(20) NOT NULL,
-  `idpromo` varchar(20) NOT NULL,
-  `annee` int(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL,
+  `annee` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `apprenant`
 --
 
-INSERT INTO `apprenant` (`matricule`, `nom`, `prenom`, `age`, `datenaiss`, `email`, `telephone`, `photo`, `idpromo`, `annee`) VALUES
-('P1M909', 'Koureissi', 'Mohamed', 20, '2023-06-26', 'koureissi89@gmail.co', 94494320, 'img', 'P1', 2023),
-('P1RT61', 'Bane', 'MG', 22, '2023-06-08', 'yiguftf', 64557557, 'Hh', '03', 2022),
-('P1ZH31', 'Koureissi', 'BOSS', 12, '2023-06-02', 'tgegg', 7977633, 'fr', '01', 2022),
-('P2M988', 'Diane', 'Ami', 12, '2023-06-03', 'fd@gmail.com', 79776334, 'pl', 'P2', 2022);
+INSERT INTO `apprenant` (`idA`, `matricule`, `nom`, `prenom`, `age`, `datenaiss`, `email`, `telephone`, `photo`, `id`, `annee`) VALUES
+(5, 'P1DQ76', 'Koureissi', 'Mohamed', 5, '2023-07-20', 'koureissi89@gmail.co', 94494320, 'A', 1, 6),
+(6, 'P1HR60', 'Diane', 'Fanta', 45, '2023-07-15', 'fd@gmail.com', 64557557, 'img', 2, 2000),
+(7, 'P1LH66', 'Tomota', 'Seyni', 21, '2023-07-20', 'seyni@gmail.com', 65959523, 'AHYW2034.JPG', 3, 2023);
 
 -- --------------------------------------------------------
 
@@ -58,19 +58,19 @@ INSERT INTO `apprenant` (`matricule`, `nom`, `prenom`, `age`, `datenaiss`, `emai
 --
 
 CREATE TABLE `promotion` (
-  `idpromo` varchar(15) NOT NULL,
-  `nom` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL,
+  `nomP` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `promotion`
 --
 
-INSERT INTO `promotion` (`idpromo`, `nom`) VALUES
-('P1', 'P1'),
-('P2', 'P2'),
-('P3', 'P3'),
-('P4', 'P4');
+INSERT INTO `promotion` (`id`, `nomP`) VALUES
+(1, 'P1'),
+(2, 'P2'),
+(3, 'P3'),
+(4, 'P4');
 
 --
 -- Index pour les tables déchargées
@@ -80,14 +80,40 @@ INSERT INTO `promotion` (`idpromo`, `nom`) VALUES
 -- Index pour la table `apprenant`
 --
 ALTER TABLE `apprenant`
-  ADD PRIMARY KEY (`matricule`),
-  ADD KEY `promotion` (`idpromo`);
+  ADD PRIMARY KEY (`idA`),
+  ADD KEY `id` (`id`);
 
 --
 -- Index pour la table `promotion`
 --
 ALTER TABLE `promotion`
-  ADD PRIMARY KEY (`idpromo`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `apprenant`
+--
+ALTER TABLE `apprenant`
+  MODIFY `idA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `promotion`
+--
+ALTER TABLE `promotion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `apprenant`
+--
+ALTER TABLE `apprenant`
+  ADD CONSTRAINT `apprenant_ibfk_1` FOREIGN KEY (`id`) REFERENCES `promotion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
