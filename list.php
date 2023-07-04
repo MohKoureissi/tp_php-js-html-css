@@ -1,5 +1,10 @@
 <?php
 require "connexion.php";
+// SUPPRESSION
+if (isset($_GET['ids'])) {
+    $bd->query('delete from apprenant where idA=' . $_GET['ids']);
+    header('Location: list.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +21,7 @@ require "connexion.php";
         <h1>Apprenants certifiés ODK  <br>  <img src="11.png" alt="">  <br>  BIENVENUE </h1>  
        <img src="téléchargement.jpg" class="mg" alt="">
     </nav>
-<table>
+<table class="aa">
         <thead>
             <tr>
                 <th>N°</th>
@@ -30,13 +35,14 @@ require "connexion.php";
                 <th>Photo</th>
                 <th>Promotion</th>
                 <th>AnnéeCertification</th>
+                <th>Action</th>
                 
             </tr>
         </thead>
         <tbody>
 <?php
 // join promotion on apprenant.matricule=promotion.idpromo
-        $req = $bd->query('SELECT * FROM apprenant ');
+        $req = $bd->query('SELECT * FROM apprenant ap , promotion pr where ap.id= pr.id ');
         $i = 1;
         while ($ligne = $req->fetch()) {
             echo '<tr>';
@@ -49,19 +55,19 @@ require "connexion.php";
             echo '<td>' . $ligne['email'] . '</td>';
             echo '<td>' . $ligne['telephone'] . '</td>';
             echo '<td>' . $ligne['photo'] . '</td>';
-            echo '<td>' . $ligne['idpromo'] . '</td>';
+            echo '<td>' . $ligne['nomP'] . '</td>';
             echo '<td>' . $ligne['annee'] . '</td>';
            
-           /* echo '<td>
-                    <a href="formulaire.php?idm=' . $ligne['ide'] . '">Editer</a>
-                    <a href="list.php?ids=' . $ligne['ide'] . '">Supprimer</a>
-                </td>';   */
+            echo '<td>
+                    <a href="formulaire.php?idm=' . $ligne['idA'] . '">Editer</a>
+                    <a href="list.php?ids=' . $ligne['idA'] . '">Supprimer</a>
+                </td>';   
             $i++;
             echo '</tr>';
         }
         ?>
         </tbody>
     </table>
-    <button><a href="formulaire1.php"> Ajouter</a></button>
+    <button><a href="formulaire.php"> Ajouter</a></button>
 </body>
 </html>

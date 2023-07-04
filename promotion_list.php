@@ -1,3 +1,7 @@
+<?php
+require "connexion.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +14,11 @@
         <thead>
             <tr>
                 <th>N°</th>
-                <th>IDPromo</th>
+                <!-- <th>IDPromo</th> -->
                 <th>Nom</th>
             </tr>
         </thead>
-        <tbody>
+        
         <tbody>
 <?php
         $req =$bd->query('SELECT * FROM promotion');
@@ -22,8 +26,8 @@
         while ($ligne = $req->fetch()) {
             echo '<tr>';
             echo '<td>' . $i . '</td>';
-            echo '<td>' . $ligne['idpromo'] . '</td>';
-            echo '<td>' . $ligne['nom'] . '</td>';
+            // echo '<td>' . $ligne['idpromo'] . '</td>';
+            echo '<td>' . $ligne['nomP'] . '</td>';
             $i++;
             echo '</tr>';
         }
