@@ -32,10 +32,12 @@ if (isset($_GET['ids'])) {
                 <th>DateNaissance</th>
                 <th>Email</th>
                 <th>Téléphone</th>
-                <th>Photo</th>
+                
                 <th>Promotion</th>
                 <th>AnnéeCertification</th>
+                <th>Photo</th>
                 <th>Action</th>
+                
                 
             </tr>
         </thead>
@@ -54,10 +56,9 @@ if (isset($_GET['ids'])) {
             echo '<td>' . $ligne['datenaiss'] . '</td>';
             echo '<td>' . $ligne['email'] . '</td>';
             echo '<td>' . $ligne['telephone'] . '</td>';
-            echo '<td>' . $ligne['photo'] . '</td>';
             echo '<td>' . $ligne['nomP'] . '</td>';
             echo '<td>' . $ligne['annee'] . '</td>';
-           
+            echo "<td > <img src=".$ligne['photo']." width= '80px' height= '80px' > </td>";
             echo '<td>
                     <a href="formulaire.php?idm=' . $ligne['idA'] . '">Editer</a>
                     <a href="list.php?ids=' . $ligne['idA'] . '">Supprimer</a>

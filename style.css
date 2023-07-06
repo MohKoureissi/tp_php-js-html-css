@@ -1,6 +1,12 @@
-
 .container{
+    display: flex;
+}
+
+
+.N1{
     justify-content: center;
+    margin-left: 40vh;
+    margin-top: 10vh;
 }
 fieldset{
     justify-content: center;
@@ -134,4 +140,23 @@ button{
 }
 a{
     color: black;
+}
+.mage{
+    margin-top: 10vh;
+    margin-left: 220px;
+    
+}
+.marge2{
+    width: 65vh; 
+    height: 65vh;
+    border-radius: 25px;
+}
+.imgg{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+tr td img{
+    height: 15px;
+    width: 15px;
 }
