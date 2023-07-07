@@ -29,7 +29,7 @@ if (isset($_POST['inscrire'])){
     $matricule= generateMatricule();
    
     $img_loc = $_FILES['photo']['tmp_name'];
-    $img_name = $_FILES['photo'] ['name'];
+    $img_name = $matricule.'_'.$_FILES['photo'] ['name'];
     $img_des = "uploadImage/".$img_name;
     move_uploaded_file($img_loc, $img_des);
 
@@ -49,41 +49,31 @@ if (isset($_POST['inscrire'])){
     header('Location:list.php');
 }
 
-//Editer
-if (isset($_GET['idm'])) {
-    $req = $bd->query('select * from apprenant where idA=' . $_GET['idm']);
-    if ($ligne = $req->fetch()) {
-        $_POST['idA'] = $ligne['idA'];
-        $_POST['nom'] = $ligne['nom'];
-        $_POST['prenom'] = $ligne['prenom'];
-        $_POST['age'] = $ligne['age'];
-        $_POST['datenaiss'] = $ligne['datenaiss'];
-        $_POST['email'] = $ligne['email'];
-        $_POST['telephone'] = $ligne['telephone'];
-        $_POST['photo'] = $ligne['photo'];
-        $_POST['id'] = $ligne['id'];
-        $_POST['annee'] = $ligne['annee'];
-    }
-}
+
 
 //Modification
 if(isset($_POST['modifier'])){
   if(isset( $_POST['nom'], $_POST['prenom'], $_POST['age'], $_POST['datenaiss'], $_POST['email'],
-  $_POST['telephone'], $_POST['photo'], $_POST['annee']));
-  $matricule= generateMatricule();
+  $_POST['telephone'], $_POST['photo'],$_POST['id'], $_POST['annee']));
+
+  $img_loc = $_FILES['photo']['tmp_name'];
+    $img_name = $matricule.'_'.$_FILES['photo'] ['name'];
+    $img_des = "uploadImage/".$img_name;
+    move_uploaded_file($img_loc, $img_des);
+ 
   $req= $bd->prepare('update apprenant set  nom=?, prenom=?, age=?, datenaiss=?, email=?, telephone=?, photo=?, id=?, annee=? where idA=?');
-  $req->bindvalue(1, $_POST['matricule']);
-  $req->bindvalue(2, $_POST['nom']);
-  $req->bindvalue(3, $_POST['prenom']);
-  $req->bindvalue(4, $_POST['age']);
-  $req->bindvalue(5, $_POST['datenaiss']);
-  $req->bindvalue(6, $_POST['email']);
-  $req->bindvalue(7, $_POST['telephone']);
-  $req->bindvalue(8, $_POST['photo']);
-  $req->bindvalue(9, $_POST['id']);
-  $req->bindvalue(10, $_POST['annee']);
-  $req->bindvalue(11, $_POST['idA']);
+ 
+  $req->bindvalue(1, $_POST['nom']);
+  $req->bindvalue(2, $_POST['prenom']);
+  $req->bindvalue(3, $_POST['age']);
+  $req->bindvalue(4, $_POST['datenaiss']);
+  $req->bindvalue(5, $_POST['email']);
+  $req->bindvalue(6, $_POST['telephone']);
+  $req->bindvalue(7, $img_des);
+  $req->bindvalue(8, $_POST['id']);
+  $req->bindvalue(9, $_POST['annee']);
+  $req->bindvalue(10, $_POST['idA']);
   $req->execute();
-  header('Location:list.php');
+ header('Location:list.php');
 }
 ?>

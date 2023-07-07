@@ -156,7 +156,14 @@ a{
     height: 100px;
     border-radius: 50px;
 }
-tr td img{
-    height: 15px;
-    width: 15px;
+.igg{
+    border: 1px; 
+    width: 250px;
+    height: 250px;
+    border-radius: 150px; 
+    margin-left: 60px;
+    margin-bottom: 25px;
+    
 }
+
+

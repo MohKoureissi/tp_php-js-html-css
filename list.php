@@ -58,7 +58,7 @@ if (isset($_GET['ids'])) {
             echo '<td>' . $ligne['telephone'] . '</td>';
             echo '<td>' . $ligne['nomP'] . '</td>';
             echo '<td>' . $ligne['annee'] . '</td>';
-            echo "<td > <img src=".$ligne['photo']." width= '80px' height= '80px' > </td>";
+            echo "<td > <a href='detail.php?idm=".$ligne['idA']."'><img src=".$ligne['photo']." width= '80px' height= '80px' ></a> </td>";
             echo '<td>
                     <a href="formulaire.php?idm=' . $ligne['idA'] . '">Editer</a>
                     <a href="list.php?ids=' . $ligne['idA'] . '">Supprimer</a>

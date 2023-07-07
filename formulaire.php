@@ -1,5 +1,22 @@
 <?php
 require "connexion.php";
+
+//Editer
+if (isset($_GET['idm'])) {
+    $req = $bd->query('select * from apprenant where idA=' . $_GET['idm']);
+    if ($ligne = $req->fetch()) {
+        $_POST['idA'] = $ligne['idA'];
+        $_POST['nom'] = $ligne['nom'];
+        $_POST['prenom'] = $ligne['prenom'];
+        $_POST['age'] = $ligne['age'];
+        $_POST['datenaiss'] = $ligne['datenaiss'];
+        $_POST['email'] = $ligne['email'];
+        $_POST['telephone'] = $ligne['telephone'];
+        $_POST['photo'] = $ligne['photo'];
+        $_POST['id'] = $ligne['id'];
+        $_POST['annee'] = $ligne['annee'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +54,7 @@ require "connexion.php";
         <!-- Envoie du formulaire -->
         <div class="form">
            
-            <!-- <div class="c1">
-                <i class="fa-solid fa-circle-user" style="color: white;"></i>
-            </div>
-         <div class="c2">
-           <input type="text" name="matricule" placeholder="Matricule">
-         </div> -->
+          
      </div>
      <div class="form">
        
